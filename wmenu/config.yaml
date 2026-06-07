@@ -1,0 +1,25 @@
+# Manifeste de l'add-on Home Assistant « Cellina's Home ».
+# Conteneur unique : Node sert la SPA compilée + l'API + SQLite (/data).
+# Intégration à la barre latérale HA via ingress (auth HA, pas de port exposé).
+name: Cellina's Home
+version: "0.2.86"
+slug: wmenu
+description: Planificateur de menus familial — synchro multi-appareils (SQLite)
+url: https://github.com/Kataplute/wmenu-hassio-addon
+# node:22-alpine couvre ces architectures via son manifeste multi-arch.
+arch:
+  - aarch64
+  - amd64
+# Le Dockerfile fournit son propre process (node) → pas d'init s6 de HA.
+init: false
+# Intégration ingress : HA sert l'app sous /api/hassio_ingress/<token>/.
+ingress: true
+ingress_port: 3000
+panel_icon: mdi:silverware-fork-knife
+panel_title: Cellina'Home
+# Accès à l'API cœur de HA (via SUPERVISOR_TOKEN) pour lire les calendriers
+# (entités calendar.*, dont Google Calendar configuré dans HA).
+homeassistant_api: true
+# Persistance : /data est monté automatiquement (SQLite + options.json).
+# Aucune option à configurer : le calendrier Google passe par l'intégration
+# native de Home Assistant, pas par l'add-on.

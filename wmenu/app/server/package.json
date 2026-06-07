@@ -1,0 +1,13 @@
+{
+  "name": "wmenu-server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Serveur familial (LAN / add-on Home Assistant) — sert la SPA + API + SQLite",
+  "scripts": {
+    "start": "node --experimental-sqlite src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
